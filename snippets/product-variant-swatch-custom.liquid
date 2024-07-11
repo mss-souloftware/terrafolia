@@ -1,0 +1,200 @@
+{% comment %}
+  Description:
+  Renders product variant swatch options based on image URLs. Defaults to buttons if no image URL is present.
+  This is generalized for any variant type.
+
+  Accepts:
+  - product: {Object} product object.
+  - option: {Object} current product_option object.
+  - variant_images_data: list of variant images
+
+  Usage:
+  {% render 'product-variant-swatch-custom',
+    product: product,
+    option: option,
+    variant_images_data: variant_images_data
+  %}
+{% endcomment %}
+
+{% assign base_store_files_url = '//ab6a45.myshopify.com/cdn/shop/files/' %}
+
+{%- liquid
+  assign product_form_id = 'product-form-' | append: section.id
+-%}
+
+<div class = "product-form-swatch__variants">
+  {% for value in option.values %}
+    {% assign variant_image_url = nil %}
+    {% assign option_disabled = true %}
+  
+    {% for variant in product.variants %}
+      {% case option.position %}
+        {% when 1 %}
+          {% if variant.option1 == value %}
+            {% assign variant_image_url = variant.featured_media | img_url: '300x300' %}
+            {% assign variant_title = variant.title %}
+            {% assign variant_price = variant.price %}
+            {% if variant.available %}
+              {% assign option_disabled = false %}
+            {% endif %}
+          {% endif %}
+        {% when 2 %}
+          {% if variant.option2 == value and variant.option1 == product.selected_or_first_available_variant.option1 %}
+            {% assign variant_image_url = variant.featured_media | img_url: '300x300' %}
+            {% if variant.available %}
+              {% assign option_disabled = false %}
+            {% endif %}
+          {% endif %}
+        {% when 3 %}
+          {% if variant.option3 == value and variant.option1 == product.selected_or_first_available_variant.option1 and variant.option2 == product.selected_or_first_available_variant.option2 %}
+            {% assign variant_image_url = variant.featured_media | img_url: '300x300' %}
+            {% if variant.available %}
+              {% assign option_disabled = false %}
+            {% endif %}
+          {% endif %}
+      {% endcase %}
+  
+      {% if variant_image_url %}
+        {% for item in variant_images_data %}
+          {% if item.variant_value == value %}
+						{% assign variant_filename = item.variant_swatch %}
+            {% unless variant_filename == blank %}
+              {% assign variant_image_url = base_store_files_url | append: variant_filename %}
+            {% endunless %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    
+    <div class="product-form__swatch" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+      <input 
+        type="radio"
+        id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" 
+        name="{{ option.name }}" 
+        value="{{ value | escape }}" 
+        form="{{ product_form_id }}" 
+        data-product-id="{{ product.id }}" 
+        data-image-url="{{ variant_image_url }}"
+        {% if option.selected_value == value %}
+          checked
+        {% endif %}
+        {% if option_disabled %}
+          class="disabled"
+        {% endif %}
+      >
+      <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+        <img src="{{ variant_image_url }}" width="" height="">
+        <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
+        <div class="cus-title">{{ variant_title }}</div>
+      <div class="cus-price">{{ variant_price | money_with_currency }}</div>
+      </label>
+    </div>
+  
+  {% endfor %}
+</div>
+
+<style>
+
+.product-form-swatch__variants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.product-form__swatch input {
+    display: none;
+}
+.product-form__swatch {
+  width: calc(100% / 3 - 10px);
+  border: 1px solid #777 !important;
+    border-radius: 0% !important; /* 50% for circle 0% for square */
+}
+.product-form__swatch  label {
+    display: block;
+    border: unset !important;
+    border-radius: 0%;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    padding: .3rem !important;
+    margin: unset !important;
+}
+.product-form__swatch img {
+  width: 100%;
+  flex: 0 0 auto;
+}  
+.product-form__swatch label:hover {
+    border-color: #333 !important;
+}
+.product-form__swatch:has(input:checked){
+  border-color: #de2666 !important;
+  border-width: 2px !important; 
+  box-shadow: inset 0 0 0 1px #fff; 
+}
+
+.product-form__swatch input:checked + label {
+    
+    background-color:unset !important;
+    color: rgb(var(--color-foreground)) !important;
+}  
+
+.product-form__swatch input.disabled + label  {
+    opacity: 0.5;
+}
+
+.product-form__swatch input.disabled + label::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom right, transparent 45%, rgba(255, 0, 0, 0.6) 50%, transparent 55%);
+    pointer-events: none;
+}
+
+  .cus-title {
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.cus-price {
+    margin-top: 5px;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: left;
+}
+
+#variant-selects-template--17555283804402__main legend{
+  display:none;
+}
+</style>
+
+
+{% comment %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var variantInputs = document.querySelectorAll('.product-form__swatch input[type="radio"], .product-form__swatch button');
+
+    function updateVariantDisplay(e) {
+        var selectedValue = e.target.tagName === 'BUTTON' ? e.target.getAttribute('data-value') : e.target.value;
+        var optionName = e.target.name;
+        var variantDisplay = document.getElementById('selected' + optionName);
+        
+        if(variantDisplay) {
+            variantDisplay.textContent = selectedValue;
+        }
+    }
+
+    variantInputs.forEach(function(input) {
+        input.addEventListener('change', updateVariantDisplay);
+        if(input.tagName === 'BUTTON') {
+            input.addEventListener('click', updateVariantDisplay);
+        }
+    });
+});
+
+
+</script>
+{% endcomment %}

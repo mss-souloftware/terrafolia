@@ -1,0 +1,20 @@
+{{ section.settings.image_1 | img_url: '2048x' | img_tag }}
+
+{% schema %}
+{
+  "name": "Image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image"    
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}

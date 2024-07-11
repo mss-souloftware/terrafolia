@@ -1,0 +1,461 @@
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+{{ 'component-totals.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+{{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+.section-{{ section.id }}-padding {
+padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+}
+
+@media screen and (min-width: 750px) {
+.section-{{ section.id }}-padding {
+padding-top: {{ section.settings.padding_top }}px;
+padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+}
+{%- endstyle -%}
+
+{%- unless settings.cart_type == 'drawer' -%}
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+<script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+
+<div class="page-width">
+
+</div>
+
+<cart-items
+  class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
+  <div class="page-width">
+    <div class="title-wrapper-with-link">
+      <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
+      <a href="{{ routes.all_products_collection_url }}" class="underlined-link">
+        {{- 'general.continue_shopping' | t -}}
+      </a>
+    </div>
+
+    <div class="cart__warnings">
+      <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
+      <a href="{{ routes.all_products_collection_url }}" class="button">
+        {{ 'general.continue_shopping' | t }}
+      </a>
+
+      {%- if shop.customer_accounts_enabled and customer == null -%}
+      <h2 class="cart__login-title">{{ 'sections.cart.login.title' | t }}</h2>
+      <p class="cart__login-paragraph">
+        {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
+      </p>
+      {%- endif -%}
+    </div>
+
+    <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
+      <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
+        <div class="js-contents">
+    {%- if cart != empty -%}
+    <div class="cartPanel">
+        <div class="container-fluid">
+
+            <div class="row justify-content-center">
+                <!-- progressbar -->
+                <ul id="progressbar">
+                    <li class="active" id="account"><strong>Order Details</strong></li>
+                    <li id="personal"><strong>Date & Time</strong></li>
+                    <li id="payment"><strong>Note Card</strong></li>
+                    <li id="confirm"><strong>Billing & Payment</strong></li>
+                </ul>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-7 text-center">
+                    <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                        <div id="msform">
+                            <fieldset>
+                                <div class="form-card">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <h2 class="fs-title">Enter Order Details</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <label class="switch-btn">
+                                                <div>Delivery</div>
+                                                <input type="checkbox" checked>
+                                                <span></span>
+                                                <div>Pickup</div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <label class="fieldlabels">Your email*</label>
+                                    <input type="email" name="attributes[Email]" id="cartEmail" placeholder="Email" />
+                                    <label class="fieldlabels">Your phone number*</label>
+                                    <input id="cartPhone" type="tel" inputmode="numeric" pattern="[0-9]*" class="hs-input"
+                                        placeholder="(555) 555-5555" tabindex="0" name="attributes[Phone]" autocomplete="off"
+                                        value="">
+
+                                    <h3 class="formInnerHeading">Recipient Details</h3>
+                                    <div class="twoColPanel">
+                                        <div class="colInner">
+                                            <label class="fieldlabels">Recipient first name*</label>
+                                            <input id="cartFname" type="text" name="attributes[cartFname]" placeholder="First Name" />
+                                        </div>
+                                        <div class="colInner">
+                                            <label class="fieldlabels">Recipient last name*</label>
+                                            <input id="cartLname" type="text" name="attributes[cartLname]" placeholder="Last Name" />
+                                        </div>
+                                    </div>
+
+                                    <div class="twoColPanel">
+                                        <div class="colInner">
+                                            <label class="fieldlabels">Address*</label>
+                                            <input id="cartAddress" type="text" name="attributes[cartAddress]" placeholder="Address" />
+                                        </div>
+                                        <div class="colInner">
+                                            <label class="fieldlabels">Suite or apartment number</label>
+                                            <input id="cartApartment" type="text" name="attributes[cartApartment]" placeholder="Suite/apartment no." />
+                                        </div>
+                                    </div>
+
+                                    <div class="twoColPanel">
+                                        <div class="colInner">
+                                            <label class="fieldlabels">City*</label>
+                                            <input id="cartCity" type="text" name="attributes[cartCity]" placeholder="City" />
+                                        </div>
+                                        <div class="colInner">
+                                            <div class="twoColPanel">
+                                                <div class="colInner">
+                                                    <label class="fieldlabels">Province*</label>
+                                                    <input id="cartProvince" type="text" name="attributes[cartProvince]" placeholder="Province" />
+                                                </div>
+                                                <div class="colInner">
+                                                    <label class="fieldlabels">Postal Code*</label>
+                                                    <input id="cartPostal" type="text" name="attributes[cartPostal]" placeholder="H1H 1H1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="twoColPanel">
+                                        <div class="colInner">
+                                            <label class="fieldlabels">Recipient phone number*</label>
+                                            <input type="text" id="cartRphone" name="attributes[cartRphone]" placeholder="(555) 555-5555" />
+                                        </div>
+                                        <div class="colInner">
+                                            <label class="fieldlabels">Special delivery instructions (optional)</label>
+                                            <input id="cartSdelivery" type="text" name="attributes[cartSdelivery]"
+                                                placeholder="Leave at the door if not home" />
+                                            <p>
+                                                Deliveries are scheduled to arrive before 6:00 PM. Please note that WE
+                                                CANNOT ACCOMMODATE SPECIFIC TIME REQUESTS for deliveries with the
+                                                exception of funerals.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <label class="fieldlabels">Select address type*</label>
+                                    <div class="radio-buttons-wrapper">
+                                        <div class="radio-button-wrapper">
+                                            <input name="radio 1" type="radio" id="Residential" checked="">
+                                            <label name="radio 1" for="">Residential</label>
+                                        </div>
+                                        <div class="radio-button-wrapper">
+                                            <input name="radio 1" type="radio" id="Business">
+                                            <label name="radio 1" for="">Business</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="button" name="next" class="next action-button" value="Continue" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="fs-title">Select Delivery Date</h2>
+                                            <div style="text-align: center; font-family: 'Arial';">
+                                                <div style="width: 100%; font-family: 'Arial'; margin: auto;">
+                                                    <div class="some_datepicker"></div>
+                                                </div>
+                                                <div class="selected"
+                                                    style="margin: auto;margin-top: 10px; max-width: 300px;"></div>
+                                            </div>
+                                            <script type="text/javascript">
+                                                $(document).ready(function () {
+                                                    var $selected = $('.selected');
+                                                    var $start = $('.start');
+                                                    var $toggleMode = $('.toggleMode');
+
+                                                    var $some_datepicker = $('.some_datepicker');
+
+                                                    var date = new Date();
+                                                    var minDate = date;
+
+                                                    $some_datepicker.datepicker({
+                                                        defaultDate: date,
+                                                        minDate: minDate,
+                                                    });
+
+
+
+
+
+                                                    var datepicker = jQueryDatepicker.data($some_datepicker);
+
+                                                    $some_datepicker.on(jQueryDatepicker.event('date_selected'), function (event, date) {
+                                                        if (date.mode == 'date') {
+                                                            console.log('date selected:', date);
+                                                        } else if (date.mode == 'start_date') {
+                                                            console.log('start date selected:', date);
+                                                        }
+
+                                                        if (datepicker.isStartDateSelected()) {
+                                                            $start.show().html('<b>start date:</b> ' + date.start_date.date.toString());
+                                                        }
+
+                                                        $selected.show().html('<b>Available times for</b> ' + date.date.toString());
+                                                    });
+
+                                                    $toggleMode.on('click', function (event) {
+                                                        datepicker.toggleMode();
+
+                                                        if (datepicker.getMode() == 'date') {
+                                                            $toggleMode.html('toggle start date selection mode');
+                                                        } else {
+                                                            $toggleMode.html('toggle date selection mode');
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="button" name="next" class="next action-button" value="Next" />
+                                <input style="display:none;" type="button" name="previous"
+                                    class="previous action-button-previous" value="Previous" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="fs-title">Recipient Note</h2>
+
+
+
+                                        </div>
+                                    </div>
+                                    <label class="fieldlabels">Please select the occasion for your purchase
+                                        (optional)</label>
+                                    <br>
+                                    <select>
+                                        <option>None</option>
+                                        <option>Sympathy</option>
+                                        <option>Illness</option>
+                                        <option>Birthday</option>
+                                        <option>Business Gifts</option>
+                                        <option>Holiday</option>
+                                        <option>Maternity</option>
+                                        <option>Anniversary</option>
+                                        <option>Other</option>
+                                    </select>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="fs-title">Enter a
+                                                personalized note for your recipient</h2>
+                                        </div>
+                                    </div>
+                                    <label class="fieldlabels">Make sure to sign your name so they know who it's
+                                        from!</label>
+                                    <div class="noCardCheckbox">
+                                        <input type="checkbox" name="pic">
+                                        <label for="pic">No card needed</label>
+                                    </div>
+                                    <label class="fieldlabels">Message</label>
+                                    <textarea></textarea>
+                                    <div class="noCardCheckbox">
+                                        <input type="checkbox" name="pic">
+                                        <label for="pic">
+                                            My recipient note is correct, free of typos and signed
+                                            appropriately.</label>
+                                    </div>
+                                </div>
+                                <input type="submit" name="next" class="next action-button" value="Submit" />
+                                <input style="display:none;" type="button" name="previous"
+                                    class="previous action-button-previous" value="Previous" />
+                            </fieldset>
+                            <fieldset style="display:none;">
+                                <div class="form-card">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <h2 class="fs-title">Finish:</h2>
+                                        </div>
+                                        <div class="col-5">
+                                            <h2 class="steps">Step 4 - 4</h2>
+                                        </div>
+                                    </div> <br><br>
+                                    <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png"
+                                                class="fit-image"> </div>
+                                    </div> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-7 text-center">
+                                            <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <h2 class="fs-title">Order Details</h2>
+                    {%- for item in cart.items -%}
+                    <div class="productBox">
+                        <div class="row">
+                            <div class="col-4">
+                                {% if item.image %}
+                                {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
+                                <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
+                                <div class="cart-item__image-container gradient global-media-settings">
+                                    <img src="{{ item.image | image_url: width: 300 }}" class="cart-item__image"
+                                        alt="{{ item.image.alt | escape }}" loading="lazy" width="150"
+                                        height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}">
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-8">
+                                {%- if settings.show_vendor -%}
+                                <p class="caption-with-letter-spacing">{{ item.product.vendor }}</p>
+                                {%- endif -%}
+
+                                <a href="{{ item.url }}" class="cart-item__name h4 break">{{ item.product.title | escape
+                                    }}</a>
+
+                                {%- if item.original_price != item.final_price -%}
+                                <div class="cart-item__discounted-prices">
+                                    <span class="visually-hidden">
+                                        {{ 'products.product.price.regular_price' | t }}
+                                    </span>
+                                    <s class="cart-item__old-price product-option">
+                                        {{- item.original_price | money -}}
+                                    </s>
+                                    <span class="visually-hidden">
+                                        {{ 'products.product.price.sale_price' | t }}
+                                    </span>
+                                    <strong class="cart-item__final-price product-option">
+                                        {{ item.final_price | money }}
+                                    </strong>
+                                </div>
+                                {%- else -%}
+                                <div class="product-option">
+                                    {{ item.original_price | money }}
+                                </div>
+                                {%- endif -%}
+
+                                {%- if item.product.has_only_default_variant == false
+                                or item.properties.size != 0
+                                or item.selling_plan_allocation != null
+                                -%}
+                                <dl>
+                                    {%- if item.product.has_only_default_variant == false -%}
+                                    {%- for option in item.options_with_values -%}
+                                    <div class="product-option">
+                                        <dt>{{ option.name }}:</dt>
+                                        <dd>{{ option.value }}</dd>
+                                    </div>
+                                    {%- endfor -%}
+                                    {%- endif -%}
+
+                                    {%- for property in item.properties -%}
+                                    {%- assign property_first_char = property.first | slice: 0 -%}
+                                    {%- if property.last != blank and property_first_char != '_' -%}
+                                    <div class="product-option">
+                                        <dt>{{ property.first }}:</dt>
+                                        <dd>
+                                            {%- if property.last contains '/uploads/' -%}
+                                            <a href="{{ property.last }}" class="link" target="_blank">
+                                                {{ property.last | split: '/' | last }}
+                                            </a>
+                                            {%- else -%}
+                                            {{ property.last }}
+                                            {%- endif -%}
+                                        </dd>
+                                    </div>
+                                    {%- endif -%}
+                                    {%- endfor -%}
+                                </dl>
+
+                                <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                                {%- endif -%}
+
+                                <ul class="discounts list-unstyled" role="list"
+                                    aria-label="{{ 'customer.order.discount' | t }}">
+                                    {%- for discount in item.line_level_discount_allocations -%}
+                                    <li class="discounts__discount">
+                                        {%- render 'icon-discount' -%}
+                                        {{ discount.discount_application.title }}
+                                    </li>
+                                    {%- endfor -%}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {%- endfor -%}
+                </div>
+            </div>
+        </div>
+    </div>
+    {%- endif -%}
+</div>
+      </div>
+
+      <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+      <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true"
+        role="status">
+        {{ 'accessibility.loading' | t }}
+      </p>
+    </form>
+  </div>
+</cart-items>
+
+{% schema %}
+{
+"name": "t:sections.main-cart-items.name",
+"settings": [
+{
+"type": "color_scheme",
+"id": "color_scheme",
+"label": "t:sections.all.colors.label",
+"default": "scheme-1"
+},
+{
+"type": "header",
+"content": "t:sections.all.padding.section_padding_heading"
+},
+{
+"type": "range",
+"id": "padding_top",
+"min": 0,
+"max": 100,
+"step": 4,
+"unit": "px",
+"label": "t:sections.all.padding.padding_top",
+"default": 36
+},
+{
+"type": "range",
+"id": "padding_bottom",
+"min": 0,
+"max": 100,
+"step": 4,
+"unit": "px",
+"label": "t:sections.all.padding.padding_bottom",
+"default": 36
+}
+]
+}
+{% endschema %}
