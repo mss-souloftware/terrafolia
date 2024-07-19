@@ -168,7 +168,18 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                         </div>
                                     </div>
                                 </div>
-
+<button
+                  type="submit"
+                  id="checkout"
+                  class="cart__checkout-button button"
+                  name="checkout"
+                  {% if cart == empty %}
+                    disabled
+                  {% endif %}
+                  form="cart"
+                >
+                  {{ 'sections.cart.checkout' | t }}
+                </button>
                                 <input disabled type="button" id="continueBtn" name="next" class="next action-button" value="Continue" />
                             </fieldset>
                             <fieldset>
