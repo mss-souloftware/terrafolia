@@ -700,3 +700,9 @@ cart-remove-button .icon-remove {
   border: 1px solid #97948c;
   height: 200px;
 }
+
+#msform .action-button:disabled{
+  opacity:0.5;
+  background:#E54956 !important;
+  color:#fff;
+}
