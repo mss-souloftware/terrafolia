@@ -96,75 +96,102 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                     <input id="cartPhone" type="tel" inputmode="numeric" pattern="[0-9]*" class="hs-input"
                                         placeholder="(555) 555-5555" tabindex="0" name="attributes[Phone]" autocomplete="off"
                                         value="" required> 
-
-                                    <h3 class="formInnerHeading">Recipient Details</h3>
-                                    <div class="twoColPanel">
-                                        <div class="colInner">
-                                            <label class="fieldlabels">Recipient first name*</label>
-                                            <input id="cartFname" type="text" name="attributes[cartFname]" placeholder="First Name" required />
+                                    <div class="pickupLocations">
+                                        <div class="pickupLocationsInner">
+                                            <p class="bolder sixteen">Westmount</p><p class="button-subtext">360 Avenue Victoria, Westmount, QC</p><p>H3Z 2N4</p>
                                         </div>
-                                        <div class="colInner">
-                                            <label class="fieldlabels">Recipient last name*</label>
-                                            <input id="cartLname" type="text" name="attributes[cartLname]" placeholder="Last Name" required />
+                                        <div class="pickupLocationsInner">
+                                            <p class="bolder sixteen">Pointe Claire</p><p class="button-subtext">343 Chemin du Bord-du-Lac, Pointe-Claire, QC</p><p>H9S 4L8</p>
                                         </div>
                                     </div>
-
-                                    <div class="twoColPanel">
-                                        <div class="colInner">
-                                            <label class="fieldlabels">Address*</label>
-                                            <input id="cartAddress" type="text" name="attributes[cartAddress]" placeholder="Address" required />
-                                        </div>
-                                        <div class="colInner">
-                                            <label class="fieldlabels">Suite or apartment number</label>
-                                            <input id="cartApartment" type="text" name="attributes[cartApartment]" placeholder="Suite/apartment no." />
-                                        </div>
-                                    </div>
-
-                                    <div class="twoColPanel">
-                                        <div class="colInner">
-                                            <label class="fieldlabels">City*</label>
-                                            <input id="cartCity" type="text" name="attributes[cartCity]" placeholder="City" required />
-                                        </div>
-                                        <div class="colInner">
-                                            <div class="twoColPanel">
-                                                <div class="colInner">
-                                                    <label class="fieldlabels">Province*</label>
-                                                    <input id="cartProvince" type="text" name="attributes[cartProvince]" placeholder="Province" required />
-                                                </div>
-                                                <div class="colInner">
-                                                    <label class="fieldlabels">Postal Code*</label>
-                                                    <input id="cartPostal" type="text" name="attributes[cartPostal]" placeholder="H1H 1H1" required />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="twoColPanel">
-                                        <div class="colInner">
-                                            <label class="fieldlabels">Recipient phone number*</label>
-                                            <input type="text" id="cartRphone" name="attributes[cartRphone]" placeholder="(555) 555-5555" required />
-                                        </div>
-                                        <div class="colInner">
-                                            <label class="fieldlabels">Special delivery instructions (optional)</label>
-                                            <input id="cartSdelivery" type="text" name="attributes[cartSdelivery]"
-                                                placeholder="Leave at the door if not home" />
+                                    <div class="locationMaps">
+                                        <div class="locationMapsInner">
                                             <p>
-                                                Deliveries are scheduled to arrive before 6:00 PM. Please note that WE
-                                                CANNOT ACCOMMODATE SPECIFIC TIME REQUESTS for deliveries with the
-                                                exception of funerals.
+                                                Our pickup address is 360 Avenue Victoria.
+                                            </p>
+                                            <p>
+                                            Select an available pickup date and time window on the next page. For best service, please arrive during your reserved time or your may experience a delay picking up your order.
+                                            </p>
+                                        </div>
+                                        <div class="locationMapsInner">
+                                            <p>
+                                                Our pickup address is 343 Chemin du Bord-du-Lac.
+                                            </p>
+                                            <p>
+                                            Select an available pickup date and time window on the next page. For best service, please arrive during your reserved time or your may experience a delay picking up your order.
                                             </p>
                                         </div>
                                     </div>
-
-                                    <label class="fieldlabels">Select address type*</label>
-                                    <div class="radio-buttons-wrapper">
-                                        <div class="radio-button-wrapper">
-                                            <input name="radio 1" type="radio" id="Residential" checked="" >
-                                            <label name="radio 1" for="">Residential</label>
+                                    <div class="extraDetails">
+                                        <h3 class="formInnerHeading">Recipient Details</h3>
+                                        <div class="twoColPanel">
+                                            <div class="colInner">
+                                                <label class="fieldlabels">Recipient first name*</label>
+                                                <input id="cartFname" type="text" name="attributes[cartFname]" placeholder="First Name" required />
+                                            </div>
+                                            <div class="colInner">
+                                                <label class="fieldlabels">Recipient last name*</label>
+                                                <input id="cartLname" type="text" name="attributes[cartLname]" placeholder="Last Name" required />
+                                            </div>
                                         </div>
-                                        <div class="radio-button-wrapper">
-                                            <input name="radio 1" type="radio" id="Business">
-                                            <label name="radio 1" for="">Business</label>
+
+                                        <div class="twoColPanel">
+                                            <div class="colInner">
+                                                <label class="fieldlabels">Address*</label>
+                                                <input id="cartAddress" type="text" name="attributes[cartAddress]" placeholder="Address" required />
+                                            </div>
+                                            <div class="colInner">
+                                                <label class="fieldlabels">Suite or apartment number</label>
+                                                <input id="cartApartment" type="text" name="attributes[cartApartment]" placeholder="Suite/apartment no." />
+                                            </div>
+                                        </div>
+
+                                        <div class="twoColPanel">
+                                            <div class="colInner">
+                                                <label class="fieldlabels">City*</label>
+                                                <input id="cartCity" type="text" name="attributes[cartCity]" placeholder="City" required />
+                                            </div>
+                                            <div class="colInner">
+                                                <div class="twoColPanel">
+                                                    <div class="colInner">
+                                                        <label class="fieldlabels">Province*</label>
+                                                        <input id="cartProvince" type="text" name="attributes[cartProvince]" placeholder="Province" required />
+                                                    </div>
+                                                    <div class="colInner">
+                                                        <label class="fieldlabels">Postal Code*</label>
+                                                        <input id="cartPostal" type="text" name="attributes[cartPostal]" placeholder="H1H 1H1" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="twoColPanel">
+                                            <div class="colInner">
+                                                <label class="fieldlabels">Recipient phone number*</label>
+                                                <input type="text" id="cartRphone" name="attributes[cartRphone]" placeholder="(555) 555-5555" required />
+                                            </div>
+                                            <div class="colInner">
+                                                <label class="fieldlabels">Special delivery instructions (optional)</label>
+                                                <input id="cartSdelivery" type="text" name="attributes[cartSdelivery]"
+                                                    placeholder="Leave at the door if not home" />
+                                                <p>
+                                                    Deliveries are scheduled to arrive before 6:00 PM. Please note that WE
+                                                    CANNOT ACCOMMODATE SPECIFIC TIME REQUESTS for deliveries with the
+                                                    exception of funerals.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <label class="fieldlabels">Select address type*</label>
+                                        <div class="radio-buttons-wrapper">
+                                            <div class="radio-button-wrapper">
+                                                <input name="radio 1" type="radio" id="Residential" checked="" >
+                                                <label name="radio 1" for="">Residential</label>
+                                            </div>
+                                            <div class="radio-button-wrapper">
+                                                <input name="radio 1" type="radio" id="Business">
+                                                <label name="radio 1" for="">Business</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
