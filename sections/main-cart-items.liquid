@@ -229,6 +229,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                                     var $toggleMode = $('.toggleMode');
 
                                                     var $some_datepicker = $('.some_datepicker');
+                                                    var $hiddenInput = $('#selectedDate');
 
                                                     var date = new Date();
                                                     var minDate = date;
@@ -238,17 +239,17 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                                         minDate: minDate,
                                                     });
 
-
-
-
-
                                                     var datepicker = jQueryDatepicker.data($some_datepicker);
 
                                                     $some_datepicker.on(jQueryDatepicker.event('date_selected'), function (event, date) {
                                                         if (date.mode == 'date') {
                                                             console.log('date selected:', date.date);
+                                                            // Set the value of the hidden input to the selected date
+                                                            $hiddenInput.val(date.date.toString());
                                                         } else if (date.mode == 'start_date') {
                                                             console.log('start date selected:', date);
+                                                            // Set the value of the hidden input to the start date
+                                                            $hiddenInput.val(date.start_date.date.toString());
                                                         }
 
                                                         if (datepicker.isStartDateSelected()) {
@@ -268,6 +269,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                                         }
                                                     });
                                                 });
+                                                var date = new Date();
                                             </script>
                                         </div>
                                     </div>
