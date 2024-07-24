@@ -316,7 +316,7 @@ if (!customElements.get('cart-note')) {
 
     $(".pickupLocations").css("display", "none");
     $(".locationMaps").css("display", "none");
-    
+
     $("#deliveryPickup").on("change", function () {
       if ($(this).is(":checked")) {
         $(".extraDetails").css("display", "block");
@@ -349,6 +349,21 @@ if (!customElements.get('cart-note')) {
 
     // Trigger input event to set initial state of the button
     $inputs.trigger('input');
+
+    $(".pickupLocationsPanel .pickupLocationsInner").on("click", function () {
+      $(".pickupLocationsPanel .pickupLocationsInner").removeClass("active");
+      $(this).addClass("active");
+      $(".locationMaps").css("display", "block");
+      let lctionVal = $(this).attr("data-location");
+
+      if (lctionVal === "Westmount") {
+        $(".locationMaps .locationMapsInner:last-child").css("display", "none");
+        $(".locationMaps .locationMapsInner:first-child").css("display", "block");
+      } else {
+        $(".locationMaps .locationMapsInner:last-child").css("display", "block");
+        $(".locationMaps .locationMapsInner:first-child").css("display", "none");
+      }
+    })
 
     $(".next").click(function () {
       let allFilled = true;
