@@ -206,6 +206,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                     </div>
                                    <input type="hidden" name="attributes[orderType]" id="orderType" />
                                    <input type="hidden" name="attributes[location]" id="location" />
+                                   <input type="hidden" name="attributes[selectedDate]" id="selectedDate" />
                                 </div>
                                 <input disabled type="button" id="continueBtn" name="next" class="next action-button" value="Continue" />
                             </fieldset>
@@ -245,7 +246,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
 
                                                     $some_datepicker.on(jQueryDatepicker.event('date_selected'), function (event, date) {
                                                         if (date.mode == 'date') {
-                                                            console.log('date selected:', date);
+                                                            console.log('date selected:', date.date);
                                                         } else if (date.mode == 'start_date') {
                                                             console.log('start date selected:', date);
                                                         }

@@ -789,7 +789,7 @@ cart-remove-button .icon-remove {
 .sideBarBox {
   background: #F5F5F5;
   padding: 15px;
-  margin-bottom: 15px;
+  margin: 15px 0;
 }
 
 .sideBarBox h4 {
