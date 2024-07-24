@@ -276,6 +276,7 @@ if (!customElements.get('cart-note')) {
 (function ($) {
   $(document).ready(function () {
     $("#cartPhone, #cartRphone").inputmask("(999) 999-9999");
+
     let $email = $("#cartEmail");
     let $phone = $("#cartPhone");
     let $fname = $("#cartFname");
@@ -286,7 +287,25 @@ if (!customElements.get('cart-note')) {
     let $postal = $("#cartPostal");
     let $rPhone = $("#cartRphone");
 
-    let $inputs = $($email).add($phone).add($fname).add($lname).add($address).add($city).add($province).add($postal).add($rPhone);
+    $("#deliveryPickup").on("change", function () {
+      if ($(this).is(":checked")) {
+        $(".extraDetails").css("display", "block");
+        $(".pickupLocations").css("display", "none");
+        $(".locationMaps").css("display", "none");
+
+        let $inputs = $($email).add($phone).add($fname).add($lname).add($address).add($city).add($province).add($postal).add($rPhone);
+
+        return $inputs;
+      } else {
+        $(".extraDetails").css("display", "none");
+        $(".pickupLocations").css("display", "block");
+        $(".locationMaps").css("display", "block");
+
+        let $inputs = $($email).add($phone);
+
+        return $inputs;
+      }
+    });
 
     $inputs.on('input', function () {
       let allFilled = true;
