@@ -286,22 +286,7 @@ if (!customElements.get('cart-note')) {
 
 (function ($) {
   $(document).ready(function () {
-    // $("#cartPhone, #cartRphone").inputmask("(999) 999-9999");
-
-    // // Custom validation to check if the phone number is filled correctly
-    // function validatePhoneInput(input) {
-    //   var isValid = input.inputmask.isComplete();
-    //   if (!isValid) {
-    //     input.setCustomValidity('Please fill out this field with a valid phone number.');
-    //   } else {
-    //     input.setCustomValidity('');
-    //   }
-    // }
-
-    // // Apply validation on input event
-    // $('#cartPhone, #cartRphone').on('input', function () {
-    //   validatePhoneInput(this);
-    // });
+    $("#cartPhone, #cartRphone").inputmask("(999) 999-9999");
 
     let $email = $("#cartEmail");
     let $phone = $("#cartPhone");
