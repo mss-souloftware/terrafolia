@@ -327,7 +327,6 @@ if (!customElements.get('cart-note')) {
       } else {
         $(".extraDetails").css("display", "none");
         $(".pickupLocations").css("display", "block");
-        $(".locationMaps").css("display", "block");
 
         $inputs = $($email).add($phone);
       }
