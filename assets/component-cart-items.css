@@ -733,3 +733,47 @@ cart-remove-button .icon-remove {
 .error {
   border-color: red;
 }
+
+.pickupLocationsPanel {
+  display: flex;
+  gap: 15px;
+}
+
+.pickupLocationsPanel .pickupLocationsInner {
+  border: 2px solid #E54956;
+  max-width: 250px;
+  padding: 10px;
+  text-align: center;
+  line-height: 1;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all .3s linear;
+}
+
+.pickupLocationsPanel .pickupLocationsInner.active,
+.pickupLocationsPanel .pickupLocationsInner:hover {
+  background: #E54956;
+  color: #fff;
+}
+
+.pickupLocationsPanel .pickupLocationsInner p:first-child {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.pickupLocationsPanel .pickupLocationsInner p:last-child {
+  margin-bottom: 0;
+}
+
+.locationMaps {
+  margin-top: 30px;
+}
+
+.locationMaps .locationMapsInner p {
+  font-size: 16px;
+}
+
+.productBox .row {
+  border: 1px solid #CCCCCC;
+  padding: 15px 0 0 0;
+}

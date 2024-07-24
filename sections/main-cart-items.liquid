@@ -70,7 +70,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                 </ul>
             </div>
             <div class="row justify-content-center">
-                <div class="col-12 col-md-7 text-center">
+                <div class="col-12 col-md-8 text-center">
                     <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
                         <div id="msform">
                             <fieldset>
@@ -97,15 +97,17 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                         placeholder="(555) 555-5555" tabindex="0" name="attributes[Phone]" autocomplete="off"
                                         value="" required> 
                                     <div class="pickupLocations">
-                                        <div class="pickupLocationsInner">
-                                            <p class="bolder sixteen">Westmount</p><p class="button-subtext">360 Avenue Victoria, Westmount, QC</p><p>H3Z 2N4</p>
-                                        </div>
-                                        <div class="pickupLocationsInner">
-                                            <p class="bolder sixteen">Pointe Claire</p><p class="button-subtext">343 Chemin du Bord-du-Lac, Pointe-Claire, QC</p><p>H9S 4L8</p>
+                                        <div class="pickupLocationsPanel">
+                                            <div class="pickupLocationsInner" data-location="Westmount">
+                                                <p class="bolder sixteen">Westmount</p><p class="button-subtext">360 Avenue Victoria, Westmount, QC</p><p>H3Z 2N4</p>
+                                            </div>
+                                            <div class="pickupLocationsInner" data-location="Pointe-Claire">
+                                                <p class="bolder sixteen">Pointe Claire</p><p class="button-subtext">343 Chemin du Bord-du-Lac, Pointe-Claire, QC</p><p>H9S 4L8</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="locationMaps">
-                                        <div class="locationMapsInner">
+                                        <div class="locationMapsInner" data-location="Westmount">
                                             <p>
                                                 Our pickup address is 360 Avenue Victoria.
                                             </p>
@@ -113,7 +115,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                             Select an available pickup date and time window on the next page. For best service, please arrive during your reserved time or your may experience a delay picking up your order.
                                             </p>
                                         </div>
-                                        <div class="locationMapsInner">
+                                        <div class="locationMapsInner" data-location="Pointe-Claire">
                                             <p>
                                                 Our pickup address is 343 Chemin du Bord-du-Lac.
                                             </p>
@@ -324,7 +326,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-5">
+                <div class="col-12 col-md-4">
                     <h2 class="fs-title">Order Details</h2>
                     {%- for item in cart.items -%}
                     <div class="productBox">
