@@ -204,6 +204,8 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                             </div>
                                         </div>
                                     </div>
+                                   <input type="hidden" name="attributes[orderType]" id="orderType" />
+                                   <input type="hidden" name="attributes[location]" id="location" />
                                 </div>
                                 <input disabled type="button" id="continueBtn" name="next" class="next action-button" value="Continue" />
                             </fieldset>
@@ -430,7 +432,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                     {%- endfor -%}
 
                     <div class="providedData">
-                    
+
                     </div>
                 </div>
             </div>
