@@ -410,7 +410,7 @@ cart-remove-button .icon-remove {
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  border: 1px solid #e54956;
+  border: 1px solid #000;
   outline-width: 0;
 }
 
@@ -728,4 +728,8 @@ cart-remove-button .icon-remove {
 #checkout:before,
 #checkout:after {
   display: none !important;
+}
+
+.error {
+  border-color: red;
 }

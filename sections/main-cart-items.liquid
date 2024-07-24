@@ -91,28 +91,28 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                         </div>
                                     </div>
                                     <label class="fieldlabels">Your email*</label>
-                                    <input type="email" name="attributes[Email]" id="cartEmail" placeholder="Email" />
+                                    <input type="email" name="attributes[Email]" id="cartEmail" placeholder="Email" required />
                                     <label class="fieldlabels">Your phone number*</label>
                                     <input id="cartPhone" type="tel" inputmode="numeric" pattern="[0-9]*" class="hs-input"
                                         placeholder="(555) 555-5555" tabindex="0" name="attributes[Phone]" autocomplete="off"
-                                        value="">
+                                        value="" required> 
 
                                     <h3 class="formInnerHeading">Recipient Details</h3>
                                     <div class="twoColPanel">
                                         <div class="colInner">
                                             <label class="fieldlabels">Recipient first name*</label>
-                                            <input id="cartFname" type="text" name="attributes[cartFname]" placeholder="First Name" />
+                                            <input id="cartFname" type="text" name="attributes[cartFname]" placeholder="First Name" required />
                                         </div>
                                         <div class="colInner">
                                             <label class="fieldlabels">Recipient last name*</label>
-                                            <input id="cartLname" type="text" name="attributes[cartLname]" placeholder="Last Name" />
+                                            <input id="cartLname" type="text" name="attributes[cartLname]" placeholder="Last Name" required />
                                         </div>
                                     </div>
 
                                     <div class="twoColPanel">
                                         <div class="colInner">
                                             <label class="fieldlabels">Address*</label>
-                                            <input id="cartAddress" type="text" name="attributes[cartAddress]" placeholder="Address" />
+                                            <input id="cartAddress" type="text" name="attributes[cartAddress]" placeholder="Address" required />
                                         </div>
                                         <div class="colInner">
                                             <label class="fieldlabels">Suite or apartment number</label>
@@ -123,17 +123,17 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                     <div class="twoColPanel">
                                         <div class="colInner">
                                             <label class="fieldlabels">City*</label>
-                                            <input id="cartCity" type="text" name="attributes[cartCity]" placeholder="City" />
+                                            <input id="cartCity" type="text" name="attributes[cartCity]" placeholder="City" required />
                                         </div>
                                         <div class="colInner">
                                             <div class="twoColPanel">
                                                 <div class="colInner">
                                                     <label class="fieldlabels">Province*</label>
-                                                    <input id="cartProvince" type="text" name="attributes[cartProvince]" placeholder="Province" />
+                                                    <input id="cartProvince" type="text" name="attributes[cartProvince]" placeholder="Province" required />
                                                 </div>
                                                 <div class="colInner">
                                                     <label class="fieldlabels">Postal Code*</label>
-                                                    <input id="cartPostal" type="text" name="attributes[cartPostal]" placeholder="H1H 1H1" />
+                                                    <input id="cartPostal" type="text" name="attributes[cartPostal]" placeholder="H1H 1H1" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -142,7 +142,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                     <div class="twoColPanel">
                                         <div class="colInner">
                                             <label class="fieldlabels">Recipient phone number*</label>
-                                            <input type="text" id="cartRphone" name="attributes[cartRphone]" placeholder="(555) 555-5555" />
+                                            <input type="text" id="cartRphone" name="attributes[cartRphone]" placeholder="(555) 555-5555" required />
                                         </div>
                                         <div class="colInner">
                                             <label class="fieldlabels">Special delivery instructions (optional)</label>
@@ -159,7 +159,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                     <label class="fieldlabels">Select address type*</label>
                                     <div class="radio-buttons-wrapper">
                                         <div class="radio-button-wrapper">
-                                            <input name="radio 1" type="radio" id="Residential" checked="">
+                                            <input name="radio 1" type="radio" id="Residential" checked="" >
                                             <label name="radio 1" for="">Residential</label>
                                         </div>
                                         <div class="radio-button-wrapper">
