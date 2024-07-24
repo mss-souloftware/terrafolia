@@ -373,6 +373,29 @@ if (!customElements.get('cart-note')) {
       }
     })
 
+
+    $("#continueBtn").on("click", function () {
+      if ($("#deliveryPickup").is(":checked")) {
+        $(".providedData").append(`
+          <div class="sideBarBox">
+          <h4>Recipient Details</h4>
+          <p>${$("#cartFname").val()} ${$("#cartLname").val()}</p>
+          <p>${$("#cartAddress").val()}</p>
+          <p>${$("#cartCity").val()},${$("#cartProvince").val()},${$("#cartPostal").val()}</p>
+          </div>
+          `)
+      } else {
+        $(".providedData").append(`
+          <div class="sideBarBox">
+          <h4>Pickup Details</h4>
+          <p>${$("#cartAddress").val()}</p>
+          <p>${$("#location").val()}</p>
+          </div>
+          `)
+      }
+    })
+
+
     $(".next").click(function () {
       let allFilled = true;
       let emailValid = true;

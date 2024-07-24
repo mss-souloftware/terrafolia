@@ -775,9 +775,28 @@ cart-remove-button .icon-remove {
 
 .productBox .row {
   border: 1px solid #CCCCCC;
-  padding: 15px 0 0 0;
+  padding: 15px 0 0;
+  width: 100%;
+  float: none;
+  box-sizing: border-box;
+  margin: 0 !important;
 }
 
 .productBox .row dl {
   display: none !important;
+}
+
+.sideBarBox {
+  background: #F5F5F5;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.sideBarBox h4 {
+  margin-bottom: 15px;
+}
+
+.sideBarBox p {
+  font-size: 14px;
+  margin: 0;
 }
