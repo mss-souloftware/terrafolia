@@ -244,12 +244,16 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                                     $some_datepicker.on(jQueryDatepicker.event('date_selected'), function (event, date) {
                                                         if (date.mode == 'date') {
                                                             console.log('date selected:', date.date);
-                                                            // Set the value of the hidden input to the selected date
-                                                            $hiddenInput.val(date.date.toString());
+                                                            // Format the date to YYYY-MM-DD
+                                                            var formattedDate = new Date(date.date).toLocaleDateString('en-CA');
+                                                            // Set the value of the hidden input to the formatted date
+                                                            $hiddenInput.val(formattedDate);
                                                         } else if (date.mode == 'start_date') {
                                                             console.log('start date selected:', date);
-                                                            // Set the value of the hidden input to the start date
-                                                            $hiddenInput.val(date.start_date.date.toString());
+                                                            // Format the start date to YYYY-MM-DD
+                                                            var formattedStartDate = new Date(date.start_date.date).toLocaleDateString('en-CA');
+                                                            // Set the value of the hidden input to the formatted start date
+                                                            $hiddenInput.val(formattedStartDate);
                                                         }
 
                                                         if (datepicker.isStartDateSelected()) {
@@ -269,6 +273,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                                         }
                                                     });
                                                 });
+
                                                 var date = new Date();
                                             </script>
                                         </div>
