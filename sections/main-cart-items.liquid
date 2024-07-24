@@ -204,9 +204,9 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                             </div>
                                         </div>
                                     </div>
-                                   <input type="hidden" name="attributes[orderType]" id="orderType" />
-                                   <input type="hidden" name="attributes[location]" id="location" />
-                                   <input type="hidden" name="attributes[selectedDate]" id="selectedDate" />
+                                   <input type="hidden" name="attributes[OrderType]" id="orderType" />
+                                   <input type="hidden" name="attributes[Location]" id="location" />
+                                   <input type="hidden" name="attributes[OrderDate]" id="selectedDate" />
                                 </div>
                                 <input disabled type="button" id="continueBtn" name="next" class="next action-button" value="Continue" />
                             </fieldset>
@@ -290,15 +290,12 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                     <div class="row">
                                         <div class="col-12">
                                             <h2 class="fs-title">Recipient Note</h2>
-
-
-
                                         </div>
                                     </div>
                                     <label class="fieldlabels">Please select the occasion for your purchase
                                         (optional)</label>
                                     <br>
-                                    <select>
+                                    <select id="recipientNote"  name="attributes[Recipient_Note]">
                                         <option>None</option>
                                         <option>Sympathy</option>
                                         <option>Illness</option>
@@ -322,7 +319,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                         <label for="pic">No card needed</label>
                                     </div>
                                     <label class="fieldlabels">Message</label>
-                                    <textarea></textarea>
+                                    <textarea id="recipientMessage"  name="attributes[Recipient_Message]"></textarea>
                                     <div class="noCardCheckbox">
                                         <input type="checkbox" name="pic">
                                         <label for="pic">

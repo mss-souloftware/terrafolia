@@ -111,6 +111,9 @@ class CartItems extends HTMLElement {
   updateQuantity(line, quantity, name, variantId) {
     this.enableLoading(line);
 
+    const orderType = document.querySelector('#orderType') ? document.querySelector('#orderType').value : '';
+    const orderDate = document.querySelector('#selectedDate') ? document.querySelector('#selectedDate').value : '';
+    const location = document.querySelector('#location') ? document.querySelector('#location').value : '';
     const cartEmail = document.querySelector('#cartEmail') ? document.querySelector('#cartEmail').value : '';
     const cartPhone = document.querySelector('#cartPhone') ? document.querySelector('#cartPhone').value : '';
     const cartFname = document.querySelector('#cartFname') ? document.querySelector('#cartFname').value : '';
@@ -122,6 +125,8 @@ class CartItems extends HTMLElement {
     const cartPostal = document.querySelector('#cartPostal') ? document.querySelector('#cartPostal').value : '';
     const cartRphone = document.querySelector('#cartRphone') ? document.querySelector('#cartRphone').value : '';
     const cartSdelivery = document.querySelector('#cartSdelivery') ? document.querySelector('#cartSdelivery').value : '';
+    const recipientNote = document.querySelector('#recipientNote') ? document.querySelector('#recipientNote').value : '';
+    const recipientMessage = document.querySelector('#recipientMessage') ? document.querySelector('#recipientMessage').value : '';
 
     const body = JSON.stringify({
       line,
@@ -129,6 +134,9 @@ class CartItems extends HTMLElement {
       sections: this.getSectionsToRender().map((section) => section.section),
       sections_url: window.location.pathname,
       attributes: {
+        OrderType : orderType,
+        OrderDate : orderDate,
+        Location : location,
         Email: cartEmail,
         Phone: cartPhone,
         First_Name: cartFname,
@@ -140,6 +148,8 @@ class CartItems extends HTMLElement {
         Postal: cartPostal,
         Recipient_Phone: cartRphone,
         Special_Delivery: cartSdelivery,
+        Recipient_Note: recipientNote,
+        Recipient_Message: recipientMessage,
       }
     });
 
@@ -393,6 +403,17 @@ if (!customElements.get('cart-note')) {
           </div>
           `)
       }
+    })
+
+    $("#scheduledAdd").on("click", function () {
+      $(".providedData").append(`
+    <div class="sideBarBox">
+    <h4>Date & Time</h4>
+    <p>${$("#selectedDate").val()}</p>
+    <p>9:00am - 5:00pm</p>
+    </div>
+    `)
+
     })
 
 
