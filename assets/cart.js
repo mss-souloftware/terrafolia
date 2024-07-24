@@ -273,9 +273,9 @@ if (!customElements.get('cart-note')) {
   );
 }
 
-(function($) {
-  $(document).ready(function() {
-
+(function ($) {
+  $(document).ready(function () {
+    $("#cartPhone, #cartRphone").inputmask("(999) 999-9999");
     let $email = $("#cartEmail");
     let $phone = $("#cartPhone");
     let $fname = $("#cartFname");
@@ -288,10 +288,10 @@ if (!customElements.get('cart-note')) {
 
     let $inputs = $($email).add($phone).add($fname).add($lname).add($address).add($city).add($province).add($postal).add($rPhone);
 
-    $inputs.on('input', function() {
+    $inputs.on('input', function () {
       let allFilled = true;
 
-      $inputs.each(function() {
+      $inputs.each(function () {
         if ($(this).val() === '') {
           allFilled = false;
           return false; // Exit the each loop early if any input is empty
@@ -305,11 +305,11 @@ if (!customElements.get('cart-note')) {
       }
     });
 
-    $(".next").click(function() {
+    $(".next").click(function () {
       let allFilled = true;
       let emailValid = true;
 
-      $inputs.each(function() {
+      $inputs.each(function () {
         if ($(this).val() === '') {
           allFilled = false;
           $(this).addClass('error'); // Optionally, add error class to highlight the field
@@ -339,7 +339,7 @@ if (!customElements.get('cart-note')) {
         next_fs.show();
         // Hide the current fieldset with style
         current_fs.animate({ opacity: 0 }, {
-          step: function(now) {
+          step: function (now) {
             // For making fieldset appear animation
             var opacity = 1 - now;
             current_fs.css({
@@ -353,7 +353,7 @@ if (!customElements.get('cart-note')) {
       }
     });
 
-    $(".previous").click(function() {
+    $(".previous").click(function () {
       var current_fs = $(this).parent();
       var previous_fs = $(this).parent().prev();
 
@@ -365,7 +365,7 @@ if (!customElements.get('cart-note')) {
 
       // Hide the current fieldset with style
       current_fs.animate({ opacity: 0 }, {
-        step: function(now) {
+        step: function (now) {
           // For making fieldset appear animation
           var opacity = 1 - now;
           current_fs.css({
@@ -385,7 +385,7 @@ if (!customElements.get('cart-note')) {
       $(".progress-bar").css("width", percent + "%");
     }
 
-    $(".submit").click(function() {
+    $(".submit").click(function () {
       return false;
     });
 
