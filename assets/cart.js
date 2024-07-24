@@ -322,6 +322,7 @@ if (!customElements.get('cart-note')) {
         $(".extraDetails").css("display", "block");
         $(".pickupLocations").css("display", "none");
         $(".locationMaps").css("display", "none");
+        $(".pickupLocationsPanel .pickupLocationsInner").removeClass("active");
 
         $inputs = $($email).add($phone).add($fname).add($lname).add($address).add($city).add($province).add($postal).add($rPhone);
       } else {
