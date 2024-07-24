@@ -314,6 +314,9 @@ if (!customElements.get('cart-note')) {
       });
     }
 
+    $(".pickupLocations").css("display", "none");
+    $(".locationMaps").css("display", "none");
+    
     $("#deliveryPickup").on("change", function () {
       if ($(this).is(":checked")) {
         $(".extraDetails").css("display", "block");

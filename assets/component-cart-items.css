@@ -777,3 +777,7 @@ cart-remove-button .icon-remove {
   border: 1px solid #CCCCCC;
   padding: 15px 0 0 0;
 }
+
+.productBox .row dl {
+  display: none !important;
+}
