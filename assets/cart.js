@@ -287,42 +287,67 @@ if (!customElements.get('cart-note')) {
     let $postal = $("#cartPostal");
     let $rPhone = $("#cartRphone");
 
+    let $inputs;
+
+    function updateInputListeners() {
+      // Remove previous listeners
+      if ($inputs) {
+        $inputs.off('input');
+      }
+
+      // Add new listeners based on the current inputs
+      $inputs.on('input', function () {
+        let allFilled = true;
+
+        $inputs.each(function () {
+          if ($(this).val() === '') {
+            allFilled = false;
+            return false; // Exit the each loop early if any input is empty
+          }
+        });
+
+        if (allFilled) {
+          $("#continueBtn").removeAttr("disabled");
+        } else {
+          $("#continueBtn").attr("disabled", "disabled");
+        }
+      });
+    }
+
     $("#deliveryPickup").on("change", function () {
       if ($(this).is(":checked")) {
         $(".extraDetails").css("display", "block");
         $(".pickupLocations").css("display", "none");
         $(".locationMaps").css("display", "none");
 
-        let $inputs = $($email).add($phone).add($fname).add($lname).add($address).add($city).add($province).add($postal).add($rPhone);
-
-        return $inputs;
+        $inputs = $($email).add($phone).add($fname).add($lname).add($address).add($city).add($province).add($postal).add($rPhone);
       } else {
         $(".extraDetails").css("display", "none");
         $(".pickupLocations").css("display", "block");
         $(".locationMaps").css("display", "block");
 
-        let $inputs = $($email).add($phone);
-
-        return $inputs;
+        $inputs = $($email).add($phone);
       }
+
+      // Update the input listeners
+      updateInputListeners();
+
+      // Trigger input event to set initial state of the button
+      $inputs.trigger('input');
     });
 
-    $inputs.on('input', function () {
-      let allFilled = true;
+    // Initial setup based on the checkbox state
+    if ($("#deliveryPickup").is(":checked")) {
+      $inputs = $($email).add($phone).add($fname).add($lname).add($address).add($city).add($province).add($postal).add($rPhone);
+    } else {
+      $inputs = $($email).add($phone);
+    }
 
-      $inputs.each(function () {
-        if ($(this).val() === '') {
-          allFilled = false;
-          return false; // Exit the each loop early if any input is empty
-        }
-      });
+    // Set up the input listeners initially
+    updateInputListeners();
 
-      if (allFilled) {
-        $("#continueBtn").removeAttr("disabled");
-      } else {
-        $("#continueBtn").attr("disabled", "disabled");
-      }
-    });
+    // Trigger input event to set initial state of the button
+    $inputs.trigger('input');
 
     $(".next").click(function () {
       let allFilled = true;
