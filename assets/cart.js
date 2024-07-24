@@ -321,13 +321,11 @@ if (!customElements.get('cart-note')) {
       if ($(this).is(":checked")) {
         $(".extraDetails").css("display", "block");
         $(".pickupLocations").css("display", "none");
-        $(".locationMaps").css("display", "none");
 
         $inputs = $($email).add($phone).add($fname).add($lname).add($address).add($city).add($province).add($postal).add($rPhone);
       } else {
         $(".extraDetails").css("display", "none");
         $(".pickupLocations").css("display", "block");
-        $(".locationMaps").css("display", "block");
 
         $inputs = $($email).add($phone);
       }
