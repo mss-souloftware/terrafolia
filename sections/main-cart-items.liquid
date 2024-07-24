@@ -242,16 +242,18 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                                     var datepicker = jQueryDatepicker.data($some_datepicker);
 
                                                     $some_datepicker.on(jQueryDatepicker.event('date_selected'), function (event, date) {
+                                                        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                                                        
                                                         if (date.mode == 'date') {
                                                             console.log('date selected:', date.date);
-                                                            // Format the date to YYYY-MM-DD
-                                                            var formattedDate = new Date(date.date).toLocaleDateString('en-CA');
+                                                            // Format the date to Thursday, July 25, 2024
+                                                            var formattedDate = new Date(date.date).toLocaleDateString('en-US', options);
                                                             // Set the value of the hidden input to the formatted date
                                                             $hiddenInput.val(formattedDate);
                                                         } else if (date.mode == 'start_date') {
                                                             console.log('start date selected:', date);
-                                                            // Format the start date to YYYY-MM-DD
-                                                            var formattedStartDate = new Date(date.start_date.date).toLocaleDateString('en-CA');
+                                                            // Format the start date to Thursday, July 25, 2024
+                                                            var formattedStartDate = new Date(date.start_date.date).toLocaleDateString('en-US', options);
                                                             // Set the value of the hidden input to the formatted start date
                                                             $hiddenInput.val(formattedStartDate);
                                                         }
@@ -279,7 +281,7 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                         </div>
                                     </div>
                                 </div>
-                                <input type="button" name="next" class="next action-button" value="Next" />
+                                <input type="button" id="scheduledAdd" name="next" class="next action-button" value="Next" />
                                 <input style="display:none;" type="button" name="previous"
                                     class="previous action-button-previous" value="Previous" />
                             </fieldset>
