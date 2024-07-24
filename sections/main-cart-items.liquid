@@ -93,9 +93,8 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                     <label class="fieldlabels">Your email*</label>
                                     <input type="email" name="attributes[Email]" id="cartEmail" placeholder="Email" required />
                                     <label class="fieldlabels">Your phone number*</label>
-                                    <input id="cartPhone" type="tel" inputmode="numeric" pattern="[0-9]*" class="hs-input"
-                                        placeholder="(555) 555-5555" tabindex="0" name="attributes[Phone]" autocomplete="off"
-                                        value="" required> 
+                                    <input id="cartPhone" type="tel" inputmode="numeric" pattern="\(\d{3}\) \d{3}-\d{4}" class="hs-input"
+       placeholder="(555) 555-5555" tabindex="0" name="attributes[Phone]" autocomplete="off" required>
                                     <div class="pickupLocations">
                                         <div class="pickupLocationsPanel">
                                             <div class="pickupLocationsInner" data-location="Westmount">
@@ -178,7 +177,8 @@ padding-bottom: {{ section.settings.padding_bottom }}px;
                                         <div class="twoColPanel">
                                             <div class="colInner">
                                                 <label class="fieldlabels">Recipient phone number*</label>
-                                                <input type="text" id="cartRphone" name="attributes[cartRphone]" placeholder="(555) 555-5555" required />
+                                                <input id="cartRphone" type="tel" inputmode="numeric" pattern="\(\d{3}\) \d{3}-\d{4}" class="hs-input"
+       placeholder="(555) 555-5555" tabindex="0" name="attributes[Phone]" autocomplete="off" required>
                                             </div>
                                             <div class="colInner">
                                                 <label class="fieldlabels">Special delivery instructions (optional)</label>

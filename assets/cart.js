@@ -134,9 +134,9 @@ class CartItems extends HTMLElement {
       sections: this.getSectionsToRender().map((section) => section.section),
       sections_url: window.location.pathname,
       attributes: {
-        OrderType : orderType,
-        OrderDate : orderDate,
-        Location : location,
+        OrderType: orderType,
+        OrderDate: orderDate,
+        Location: location,
         Email: cartEmail,
         Phone: cartPhone,
         First_Name: cartFname,
@@ -287,6 +287,21 @@ if (!customElements.get('cart-note')) {
 (function ($) {
   $(document).ready(function () {
     $("#cartPhone, #cartRphone").inputmask("(999) 999-9999");
+
+    // Custom validation to check if the phone number is filled correctly
+    function validatePhoneInput(input) {
+      var isValid = input.inputmask.isComplete();
+      if (!isValid) {
+        input.setCustomValidity('Please fill out this field with a valid phone number.');
+      } else {
+        input.setCustomValidity('');
+      }
+    }
+
+    // Apply validation on input event
+    $('#cartPhone, #cartRphone').on('input', function () {
+      validatePhoneInput(this);
+    });
 
     let $email = $("#cartEmail");
     let $phone = $("#cartPhone");
